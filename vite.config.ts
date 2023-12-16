@@ -7,7 +7,7 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: path.resolve(__dirname, 'src/lib/index.ts'),
       name: 'rc-global-modal',
       fileName: 'index',
     },

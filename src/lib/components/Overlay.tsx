@@ -10,7 +10,7 @@ const Overlay = ({ children }: Props) => {
       css={css({
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(145,145,145,0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
