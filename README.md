@@ -22,9 +22,9 @@ npm i rc-global-modal
 ## Props
 
 | Props | Types | Required | Default | Description |
-| --- | --- | --: | --: | --: | --- |
-| children | React.FC<any> | ✅ |  | component that will be displayed inside modal |
-| id | string | number | ✅ |  | unique id for modal |
+| :-: | :-: | :-: | :-: | :-: |
+| children | React.FC | ✅ |  | component that will be displayed inside modal |
+| id | string \| number | ✅ |  | unique id for modal |
 
 ## Usage
 
