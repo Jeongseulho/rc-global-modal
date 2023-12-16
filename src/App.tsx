@@ -1,19 +1,13 @@
-import { css } from '@emotion/react';
+import getModalPortal from './portal/getModalPortal';
+import ReactDOM from 'react-dom';
 
 function App() {
-  return (
-    <div
-      css={css({
-        color: 'hotpink',
-        fontSize: 50,
-        border: '1px solid currentColor',
-        ':hover': {
-          color: 'green',
-        },
-      })}
-    >
-      Hello World
-    </div>
+  const modalPortal = getModalPortal();
+  return ReactDOM.createPortal(
+    <div className="modal-overlay">
+      <div className="modal-content">테스트</div>
+    </div>,
+    modalPortal,
   );
 }
 
