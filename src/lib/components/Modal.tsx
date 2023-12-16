@@ -2,11 +2,10 @@ import getModalPortal from '../portal/getModalPortal';
 import { createPortal } from 'react-dom';
 import Overlay from './Overlay';
 import ModalContainer from './ModalContainer';
-import { ModalId } from '../types/ModalType';
 import { useModal } from '../context/ModalContext';
 
 interface Props {
-  id: ModalId;
+  id: string | number;
   children: React.ReactNode;
 }
 
