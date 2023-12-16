@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 
-const Content = () => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const ModalContainer = ({ children }: Props) => {
   return (
     <div
       css={css({
@@ -9,9 +13,9 @@ const Content = () => {
         borderRadius: '0.5rem',
       })}
     >
-      <h1>Content</h1>
+      {children}
     </div>
   );
 };
 
-export default Content;
+export default ModalContainer;
