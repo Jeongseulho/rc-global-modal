@@ -1,12 +1,14 @@
 import getModalPortal from './portal/getModalPortal';
 import ReactDOM from 'react-dom';
+import Overlay from './components/Overlay';
+import Content from './components/Content';
 
 function App() {
   const modalPortal = getModalPortal();
   return ReactDOM.createPortal(
-    <div className="modal-overlay">
-      <div className="modal-content">테스트</div>
-    </div>,
+    <Overlay>
+      <Content />
+    </Overlay>,
     modalPortal,
   );
 }
