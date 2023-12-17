@@ -1,10 +1,18 @@
 import { css } from '@emotion/react';
+import { useModal } from '../context/ModalContext';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const Overlay = ({ children }: Props) => {
+  const { closeModal } = useModal();
+  const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  };
+
   return (
     <div
       css={css({
@@ -17,6 +25,7 @@ const Overlay = ({ children }: Props) => {
         justifyContent: 'center',
         alignItems: 'center',
       })}
+      onClick={onCloseModalClickOverlay}
     >
       {children}
     </div>
