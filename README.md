@@ -1,30 +1,90 @@
-# React + TypeScript + Vite
+# rc global modal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+manage modal using global state in react project
 
-Currently, two official plugins are available:
+[![npm version](https://img.shields.io/npm/v/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)  
+[![npm downloads](https://img.shields.io/npm/dm/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+- [Installation](#installation)
+- [Props](#props)
+- [Usage](#usage)
+- [Examples](#examples)
+- [License](#license)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+```
+npm i rc-global-modal
+```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+## Props
+
+| Props | Types | Required | Default | Description |
+| :-: | :-: | :-: | :-: | :-: |
+| children | React.FC | ✅ |  | component that will be displayed inside modal |
+| id | string \| number | ✅ |  | unique id for modal |
+
+## Usage
+
+1. Wrap your app with `ModalProvider` component
+
+```tsx
+import { ModalProvider } from 'rc-global-modal';
+
+function App() {
+  return (
+    <ModalProvider>
+      <Home />
+    </ModalProvider>
+  );
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Use `useModal` hook to manage modal(must be inside `ModalProvider`)
+
+```tsx
+import { useModal } from 'rc-global-modal';
+
+const Home = () => {
+  const { openModal, closeModal } = useModal();
+
+  ...
+
+};
+```
+
+## Examples
+
+```tsx
+import { useModal } from 'rc-global-modal';
+import { Modal } from 'rc-global-modal';
+
+const Home = () => {
+  const { openModal, closeModal } = useModal();
+  return (
+    <div>
+      <button onClick={() => openModal(1)}>open Id One modal</button>
+
+      <button onClick={() => openModal(2)}>open Id Two modal</button>
+
+      <Modal id={1}>
+        <h1>IdOneModal</h1>
+        <button onClick={closeModal}>close modal</button>
+      </Modal>
+
+      <Modal id={2}>
+        <h1>IdTwoModal</h1>
+        <button onClick={closeModal}>close modal</button>
+      </Modal>
+    </div>
+  );
+};
+
+export default Home;
+```
+
+## License
+
+MIT
