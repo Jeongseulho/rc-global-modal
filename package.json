@@ -1,11 +1,13 @@
 {
   "name": "rc-global-modal",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "global modal for react",
   "license": "MIT",
   "keywords": [
     "react",
-    "modal"
+    "modal",
+    "react-component",
+    "react-modal"
   ],
   "repository": {
     "type": "git",

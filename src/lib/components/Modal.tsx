@@ -1,5 +1,3 @@
-import getModalPortal from '../portal/getModalPortal';
-import { createPortal } from 'react-dom';
 import Overlay from './Overlay';
 import ModalContainer from './ModalContainer';
 import { useContext } from 'react';
@@ -11,17 +9,15 @@ interface Props {
 }
 
 function Modal({ children, id }: Props) {
-  const modalPortal = getModalPortal();
   const { openModalId } = useContext(ModalStateContext);
 
-  return openModalId === id
-    ? createPortal(
-        <Overlay>
-          <ModalContainer>{children}</ModalContainer>
-        </Overlay>,
-        modalPortal,
-      )
-    : null;
+  return (
+    openModalId === id && (
+      <Overlay>
+        <ModalContainer>{children}</ModalContainer>
+      </Overlay>
+    )
+  );
 }
 
 export default Modal;

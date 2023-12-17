@@ -9,6 +9,8 @@ const Overlay = ({ children }: Props) => {
     <div
       css={css({
         position: 'fixed',
+        width: '100vw',
+        height: '100vh',
         inset: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         display: 'flex',
