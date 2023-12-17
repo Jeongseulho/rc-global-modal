@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useMemo } from 'react';
 import { ModalId } from '../types/ModalType';
 
 interface ModalContextAction {
@@ -10,9 +10,12 @@ interface ModalContextState {
   openModalId: ModalId;
 }
 
-const ModalContext = createContext<ModalContextAction & ModalContextState>({
+const ModalActionContext = createContext<ModalContextAction>({
   openModal: () => {},
   closeModal: () => {},
+});
+
+const ModalStateContext = createContext<ModalContextState>({
   openModalId: null,
 });
 
@@ -22,22 +25,34 @@ interface ProviderProps {
 
 const ModalProvider = ({ children }: ProviderProps) => {
   const [openModalId, setOpenModalId] = useState<ModalId>(null);
-  const openModal = (id: ModalId) => setOpenModalId(id);
-  const closeModal = () => setOpenModalId(null);
+
+  const actions = useMemo(
+    () => ({
+      openModal(id: ModalId) {
+        setOpenModalId(id);
+      },
+      closeModal() {
+        setOpenModalId(null);
+      },
+    }),
+    [],
+  );
 
   return (
-    <ModalContext.Provider value={{ openModal, closeModal, openModalId }}>
-      {children}
-    </ModalContext.Provider>
+    <ModalActionContext.Provider value={actions}>
+      <ModalStateContext.Provider value={{ openModalId }}>
+        {children}
+      </ModalStateContext.Provider>
+    </ModalActionContext.Provider>
   );
 };
 
 const useModal = () => {
-  const context = useContext(ModalContext);
+  const context = useContext(ModalActionContext);
   if (!context) {
     throw new Error('useModal must be used within a ModalProvider');
   }
   return context;
 };
 
-export { ModalProvider, useModal };
+export { ModalProvider, useModal, ModalStateContext };
