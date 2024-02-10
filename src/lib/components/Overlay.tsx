@@ -8,9 +8,7 @@ interface Props {
 const Overlay = ({ children }: Props) => {
   const { closeModal } = useModal();
   const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
+    if (e.target === e.currentTarget) closeModal();
   };
 
   return (
