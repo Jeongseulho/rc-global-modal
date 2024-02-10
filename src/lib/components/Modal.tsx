@@ -4,9 +4,10 @@ import { useContext } from 'react';
 import { ModalStateContext } from '../context/ModalContext';
 import { createPortal } from 'react-dom';
 import getModalRoot from '../utils/getModalRoot';
+import { ModalId } from '../types/ModalType';
 
 interface Props {
-  id: string | number;
+  id: Exclude<ModalId, null>;
   children: React.ReactNode;
 }
 
