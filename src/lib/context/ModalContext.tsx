@@ -2,7 +2,7 @@ import { createContext, useState, useContext, useMemo } from 'react';
 import { ModalId } from '../types/ModalType';
 
 interface ModalContextAction {
-  openModal: (id: ModalId) => void;
+  openModal: (id: Exclude<ModalId, null>) => void;
   closeModal: () => void;
 }
 
@@ -28,7 +28,7 @@ const ModalProvider = ({ children }: ProviderProps) => {
 
   const actions = useMemo(
     () => ({
-      openModal(id: ModalId) {
+      openModal(id: Exclude<ModalId, null>) {
         setOpenModalId(id);
       },
       closeModal() {

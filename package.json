@@ -24,7 +24,9 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "size": "size-limit"
+    "size": "size-limit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "size-limit": [
     {
@@ -45,6 +47,13 @@
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
     "@size-limit/preset-small-lib": "^11.0.1",
+    "@storybook/addon-essentials": "^7.6.13",
+    "@storybook/addon-interactions": "^7.6.13",
+    "@storybook/addon-links": "^7.6.13",
+    "@storybook/blocks": "^7.6.13",
+    "@storybook/react": "^7.6.13",
+    "@storybook/react-vite": "^7.6.13",
+    "@storybook/test": "^7.6.13",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
@@ -54,7 +63,9 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.6.15",
     "path": "^0.12.7",
+    "storybook": "^7.6.13",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.6.4"
