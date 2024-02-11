@@ -22,7 +22,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           tags: true
-          token: ${{ secrets.MODAL_LIBRARY_TOKEN }}
+          github_token: ${{ secrets.MODAL_LIBRARY_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v3
