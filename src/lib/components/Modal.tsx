@@ -12,7 +12,7 @@ interface Props {
   closeOnOverlayClick?: boolean;
 }
 
-function Modal({ children, id, closeOnOverlayClick }: Props) {
+function Modal({ children, id, closeOnOverlayClick = true }: Props) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
 

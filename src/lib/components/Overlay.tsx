@@ -3,7 +3,7 @@ import { useModal } from '../context/ModalContext';
 
 interface Props {
   children: React.ReactNode;
-  closeOnOverlayClick?: boolean;
+  closeOnOverlayClick: boolean;
 }
 
 const Overlay = ({ children, closeOnOverlayClick }: Props) => {
