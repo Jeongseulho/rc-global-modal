@@ -25,6 +25,7 @@ npm i rc-global-modal
 | :-: | :-: | :-: | :-: | :-: |
 | children | React.FC | ✅ |  | component that will be displayed inside modal |
 | id | string \| number | ✅ |  | unique id for modal |
+| closeOnOverlayClick | boolean | ❌ | true | close modal when overlay is clicked |
 
 ## Usage
 
@@ -42,24 +43,43 @@ function App() {
 }
 ```
 
-2. Use `useModal` hook to manage modal(must be inside `ModalProvider`)
+2. Use `Modal` component to display modal(must be inside `ModalProvider`)
 
 ```tsx
-import { useModal } from 'rc-global-modal';
+import { Modal } from 'rc-global-modal';
+
+const Home = () => {
+  return (
+      <Modal id={1}>
+        <h1>IdOneModal</h1>
+      </Modal>
+  );
+};
+```
+
+3. Use `openModal` and `closeModal` function to open and close modal(must be inside `ModalProvider`)
+
+```tsx
+import { Modal, useModal } from 'rc-global-modal';
 
 const Home = () => {
   const { openModal, closeModal } = useModal();
-
-  ...
-
+  return (
+    <div>
+      <button onClick={() => openModal(1)}>open Id One modal</button>
+      <Modal id={1}>
+        <h1>IdOneModal</h1>
+        <button onClick={closeModal}>close modal</button>
+      </Modal>
+    </div>
+  );
 };
 ```
 
 ## Examples
 
 ```tsx
-import { useModal } from 'rc-global-modal';
-import { Modal } from 'rc-global-modal';
+import { Modal, useModal } from 'rc-global-modal';
 
 const Home = () => {
   const { openModal, closeModal } = useModal();

@@ -8,9 +8,20 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
+  argTypes: {
+    closeOnOverlayClick: {
+      control: 'boolean',
+      description: 'Close the modal when the overlay is clicked',
+      defaultValue: true,
+    },
+  },
 } satisfies Meta<typeof ModalInteraction>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ModalInteractionExample: Story = {};
+export const ModalInteractionExample: Story = {
+  args: {
+    closeOnOverlayClick: true,
+  },
+};

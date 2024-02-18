@@ -7,18 +7,19 @@ import getModalRoot from '../utils/getModalRoot';
 import { ModalId } from '../types/ModalType';
 
 interface Props {
-  id: Exclude<ModalId, null>;
   children: React.ReactNode;
+  id: Exclude<ModalId, null>;
+  closeOnOverlayClick?: boolean;
 }
 
-function Modal({ children, id }: Props) {
+function Modal({ children, id, closeOnOverlayClick = true }: Props) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
 
   return (
     openModalId === id &&
     createPortal(
-      <Overlay>
+      <Overlay closeOnOverlayClick={closeOnOverlayClick}>
         <ModalContainer>{children}</ModalContainer>
       </Overlay>,
       modalRoot,
