@@ -23,9 +23,13 @@ npm i rc-global-modal
 
 | Props | Types | Required | Default | Description |
 | :-: | :-: | :-: | :-: | :-: |
-| children | React.FC | ✅ |  | component that will be displayed inside modal |
-| id | string \| number | ✅ |  | unique id for modal |
-| closeOnOverlayClick | boolean | ❌ | true | close modal when overlay is clicked |
+| children | `React.FC` | ✅ |  | component that will be displayed inside modal |
+| id | `string \| number` | ✅ |  | unique id for modal |
+| closeOnOverlayClick | `boolean` | ❌ | `true` | close modal when overlay is clicked |
+| modalContainerClassName | `string` | ❌ |  | class name for modal container |
+| overlayClassName | `string` | ❌ |  | class name for overlay |
+| modalContainerStyle | `React.CSSProperties` | ❌ |  | custom style for modal container |
+| overlayStyle | `React.CSSProperties` | ❌ |  | custom style for overlay |
 
 ## Usage
 
