@@ -12,7 +12,6 @@ const meta = {
     closeOnOverlayClick: {
       control: 'boolean',
       description: 'Close the modal when the overlay is clicked',
-      defaultValue: true,
     },
   },
 } satisfies Meta<typeof ModalInteraction>;

@@ -4,9 +4,14 @@ import { useModal } from '../context/ModalContext';
 interface Props {
   children: React.ReactNode;
   closeOnOverlayClick: boolean;
+  overlayClassName?: string;
 }
 
-const Overlay = ({ children, closeOnOverlayClick }: Props) => {
+const Overlay = ({
+  children,
+  closeOnOverlayClick,
+  overlayClassName,
+}: Props) => {
   const { closeModal } = useModal();
   const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) closeModal();
@@ -24,6 +29,7 @@ const Overlay = ({ children, closeOnOverlayClick }: Props) => {
         justifyContent: 'center',
         alignItems: 'center',
       })}
+      className={overlayClassName}
       onClick={closeOnOverlayClick ? onCloseModalClickOverlay : undefined}
     >
       {children}
