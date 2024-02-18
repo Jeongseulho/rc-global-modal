@@ -5,12 +5,14 @@ interface Props {
   children: React.ReactNode;
   closeOnOverlayClick: boolean;
   overlayClassName?: string;
+  overlayStyle?: React.CSSProperties;
 }
 
 const Overlay = ({
   children,
   closeOnOverlayClick,
   overlayClassName,
+  overlayStyle,
 }: Props) => {
   const { closeModal } = useModal();
   const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -28,6 +30,7 @@ const Overlay = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        ...overlayStyle,
       })}
       className={overlayClassName}
       onClick={closeOnOverlayClick ? onCloseModalClickOverlay : undefined}

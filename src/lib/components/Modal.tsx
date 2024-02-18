@@ -12,6 +12,8 @@ interface Props {
   closeOnOverlayClick?: boolean;
   modalContainerClassName?: string;
   overlayClassName?: string;
+  modalContainerStyle?: React.CSSProperties;
+  overlayStyle?: React.CSSProperties;
 }
 
 function Modal({
@@ -20,6 +22,8 @@ function Modal({
   closeOnOverlayClick = true,
   modalContainerClassName,
   overlayClassName,
+  modalContainerStyle,
+  overlayStyle,
 }: Props) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
@@ -30,8 +34,12 @@ function Modal({
       <Overlay
         closeOnOverlayClick={closeOnOverlayClick}
         overlayClassName={overlayClassName}
+        overlayStyle={overlayStyle}
       >
-        <ModalContainer modalContainerClassName={modalContainerClassName}>
+        <ModalContainer
+          modalContainerClassName={modalContainerClassName}
+          modalContainerStyle={modalContainerStyle}
+        >
           {children}
         </ModalContainer>
       </Overlay>,
