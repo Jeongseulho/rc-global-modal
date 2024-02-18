@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import Modal from '../lib/index';
 import { useModal } from '../lib/index';
 
-export const ModalStyle = () => {
+interface Props {
+  modalContainerStyle: React.CSSProperties;
+  overlayStyle: React.CSSProperties;
+}
+
+export const ModalStyle = ({ modalContainerStyle, overlayStyle }: Props) => {
   const { openModal } = useModal();
 
   useEffect(() => {
@@ -10,7 +15,11 @@ export const ModalStyle = () => {
   }, [openModal]);
 
   return (
-    <Modal id="modal-id">
+    <Modal
+      id="modal-id"
+      modalContainerStyle={modalContainerStyle}
+      overlayStyle={overlayStyle}
+    >
       <h1>Modal Content</h1>
     </Modal>
   );
