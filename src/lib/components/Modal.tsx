@@ -10,17 +10,38 @@ interface Props {
   children: React.ReactNode;
   id: Exclude<ModalId, null>;
   closeOnOverlayClick?: boolean;
+  modalContainerClassName?: string;
+  overlayClassName?: string;
+  modalContainerStyle?: React.CSSProperties;
+  overlayStyle?: React.CSSProperties;
 }
 
-function Modal({ children, id, closeOnOverlayClick = true }: Props) {
+function Modal({
+  children,
+  id,
+  closeOnOverlayClick = true,
+  modalContainerClassName,
+  overlayClassName,
+  modalContainerStyle,
+  overlayStyle,
+}: Props) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
 
   return (
     openModalId === id &&
     createPortal(
-      <Overlay closeOnOverlayClick={closeOnOverlayClick}>
-        <ModalContainer>{children}</ModalContainer>
+      <Overlay
+        closeOnOverlayClick={closeOnOverlayClick}
+        overlayClassName={overlayClassName}
+        overlayStyle={overlayStyle}
+      >
+        <ModalContainer
+          modalContainerClassName={modalContainerClassName}
+          modalContainerStyle={modalContainerStyle}
+        >
+          {children}
+        </ModalContainer>
       </Overlay>,
       modalRoot,
     )
