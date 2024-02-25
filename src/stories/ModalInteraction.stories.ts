@@ -13,6 +13,10 @@ const meta = {
       control: 'boolean',
       description: 'Close the modal when the overlay is clicked',
     },
+    closeOnEsc: {
+      control: 'boolean',
+      description: 'Close the modal when the escape key is pressed',
+    },
   },
 } satisfies Meta<typeof ModalInteraction>;
 
@@ -22,5 +26,6 @@ type Story = StoryObj<typeof meta>;
 export const ModalInteractionExample: Story = {
   args: {
     closeOnOverlayClick: true,
+    closeOnEsc: true,
   },
 };
