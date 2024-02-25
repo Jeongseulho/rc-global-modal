@@ -3,6 +3,8 @@
 manage modal using global state in react project
 
 [![npm version](https://img.shields.io/npm/v/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)  
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/rc-global-modal?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)  
+[![npm total downloads](https://img.shields.io/npm/dt/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)
 [![npm downloads](https://img.shields.io/npm/dm/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)
 
 ## Table of Contents
@@ -30,6 +32,7 @@ npm i rc-global-modal
 | overlayClassName | `string` | ❌ |  | class name for overlay |
 | modalContainerStyle | `React.CSSProperties` | ❌ |  | custom style for modal container |
 | overlayStyle | `React.CSSProperties` | ❌ |  | custom style for overlay |
+| closeOnEsc | `boolean` | ❌ | `true` | close modal when esc key is pressed |
 
 ## Usage
 
