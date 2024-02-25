@@ -1,18 +1,12 @@
 import { css } from '@emotion/react';
-
-interface Props {
-  children: React.ReactNode;
-  modalContainerClassName?: string;
-  modalContainerStyle?: React.CSSProperties;
-  modalContainerRef?: React.RefObject<HTMLDivElement>;
-}
+import { ModalContainerProps } from '../types/ModalProps';
 
 const ModalContainer = ({
   children,
   modalContainerClassName,
   modalContainerStyle,
   modalContainerRef,
-}: Props) => {
+}: ModalContainerProps) => {
   return (
     <div
       css={css({

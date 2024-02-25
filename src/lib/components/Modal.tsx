@@ -4,21 +4,8 @@ import { useContext, useEffect } from 'react';
 import { ModalStateContext } from '../context/ModalContext';
 import { createPortal } from 'react-dom';
 import getModalRoot from '../utils/getModalRoot';
-import { ModalId } from '../types/ModalType';
 import { useModal } from '../context/ModalContext';
-
-interface Props {
-  children: React.ReactNode;
-  id: Exclude<ModalId, null>;
-  closeOnOverlayClick?: boolean;
-  modalContainerClassName?: string;
-  overlayClassName?: string;
-  modalContainerStyle?: React.CSSProperties;
-  overlayStyle?: React.CSSProperties;
-  closeOnEsc?: boolean;
-  modalContainerRef?: React.RefObject<HTMLDivElement>;
-  overlayRef?: React.RefObject<HTMLDivElement>;
-}
+import { ModalProps } from '../types/ModalProps';
 
 function Modal({
   children,
@@ -31,33 +18,38 @@ function Modal({
   closeOnEsc = true,
   modalContainerRef,
   overlayRef,
-}: Props) {
+}: ModalProps) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
   const { closeModal } = useModal();
+
   useEffect(() => {
     const closeOnEscHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && closeOnEsc) {
-        closeModal();
-      }
+      if (e.key === 'Escape' && closeOnEsc) closeModal();
     };
     document.addEventListener('keydown', closeOnEscHandler);
     return () => document.removeEventListener('keydown', closeOnEscHandler);
   }, [closeOnEsc, closeModal]);
 
+  const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) closeModal();
+  };
+
   return (
     openModalId === id &&
     createPortal(
       <Overlay
-        closeOnOverlayClick={closeOnOverlayClick}
+        onCloseModalClickOverlay={
+          closeOnOverlayClick ? onCloseModalClickOverlay : undefined
+        }
         overlayClassName={overlayClassName}
         overlayStyle={overlayStyle}
         overlayRef={overlayRef}
       >
         <ModalContainer
-          modalContainerRef={modalContainerRef}
           modalContainerClassName={modalContainerClassName}
           modalContainerStyle={modalContainerStyle}
+          modalContainerRef={modalContainerRef}
         >
           {children}
         </ModalContainer>
