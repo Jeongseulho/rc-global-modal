@@ -1,26 +1,13 @@
 import { css } from '@emotion/react';
-import { useModal } from '../context/ModalContext';
-
-interface Props {
-  children: React.ReactNode;
-  closeOnOverlayClick: boolean;
-  overlayClassName?: string;
-  overlayStyle?: React.CSSProperties;
-  overlayRef?: React.RefObject<HTMLDivElement>;
-}
+import { OverlayProps } from '../types/ModalProps';
 
 const Overlay = ({
   children,
-  closeOnOverlayClick,
+  onCloseModalClickOverlay,
   overlayClassName,
   overlayStyle,
   overlayRef,
-}: Props) => {
-  const { closeModal } = useModal();
-  const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) closeModal();
-  };
-
+}: OverlayProps) => {
   return (
     <div
       css={css({
@@ -35,7 +22,7 @@ const Overlay = ({
         ...overlayStyle,
       })}
       className={overlayClassName}
-      onClick={closeOnOverlayClick ? onCloseModalClickOverlay : undefined}
+      onClick={onCloseModalClickOverlay}
       ref={overlayRef}
     >
       {children}
