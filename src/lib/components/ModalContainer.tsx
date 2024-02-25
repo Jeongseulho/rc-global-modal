@@ -4,12 +4,14 @@ interface Props {
   children: React.ReactNode;
   modalContainerClassName?: string;
   modalContainerStyle?: React.CSSProperties;
+  modalContainerRef?: React.RefObject<HTMLDivElement>;
 }
 
 const ModalContainer = ({
   children,
   modalContainerClassName,
   modalContainerStyle,
+  modalContainerRef,
 }: Props) => {
   return (
     <div
@@ -20,6 +22,7 @@ const ModalContainer = ({
         ...modalContainerStyle,
       })}
       className={modalContainerClassName}
+      ref={modalContainerRef}
     >
       {children}
     </div>
