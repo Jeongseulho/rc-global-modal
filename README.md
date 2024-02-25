@@ -33,6 +33,8 @@ npm i rc-global-modal
 | modalContainerStyle | `React.CSSProperties` | ❌ |  | custom style for modal container |
 | overlayStyle | `React.CSSProperties` | ❌ |  | custom style for overlay |
 | closeOnEsc | `boolean` | ❌ | `true` | close modal when esc key is pressed |
+| modalContainerRef | `React.RefObject` | ❌ |  | ref for modal container |
+| overlayRef | `React.RefObject` | ❌ |  | ref for overlay |
 
 ## Usage
 
