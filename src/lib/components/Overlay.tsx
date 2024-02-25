@@ -6,6 +6,7 @@ interface Props {
   closeOnOverlayClick: boolean;
   overlayClassName?: string;
   overlayStyle?: React.CSSProperties;
+  overlayRef?: React.RefObject<HTMLDivElement>;
 }
 
 const Overlay = ({
@@ -13,6 +14,7 @@ const Overlay = ({
   closeOnOverlayClick,
   overlayClassName,
   overlayStyle,
+  overlayRef,
 }: Props) => {
   const { closeModal } = useModal();
   const onCloseModalClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -34,6 +36,7 @@ const Overlay = ({
       })}
       className={overlayClassName}
       onClick={closeOnOverlayClick ? onCloseModalClickOverlay : undefined}
+      ref={overlayRef}
     >
       {children}
     </div>
