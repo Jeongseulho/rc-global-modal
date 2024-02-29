@@ -1,4 +1,7 @@
 import { ModalId } from './ModalType';
+import { AnimationDuration } from './Animation';
+import { ANIMATION_TYPE } from './Animation';
+import { ObjValues } from './ObjValues';
 
 export interface OverlayProps {
   children: React.ReactNode;
@@ -23,4 +26,6 @@ export interface ModalProps
   id: Exclude<ModalId, null>;
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
+  animationType: ObjValues<typeof ANIMATION_TYPE>;
+  animationDuration: AnimationDuration;
 }

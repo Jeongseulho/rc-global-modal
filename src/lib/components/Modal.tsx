@@ -18,7 +18,9 @@ function Modal({
   closeOnEsc = true,
   modalContainerRef,
   overlayRef,
-}: ModalProps) {
+}: // animationType = 'none',
+// animationDuration = 300,
+ModalProps) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
   const { closeModal } = useModal();
