@@ -1,6 +1,7 @@
+// TODO: 애니메이션 종류 추가
 export const ANIMATION_TYPE = {
-  NONE: 'none',
   FADE: 'fade',
+  SLIDE_UP: 'slideUp',
 } as const;
 
 /**
@@ -9,6 +10,7 @@ export const ANIMATION_TYPE = {
  */
 export const ANIMATION_STYLE_MAP = {
   [ANIMATION_TYPE.FADE]: 'opacity',
+  [ANIMATION_TYPE.SLIDE_UP]: 'transform',
 } as const;
 
 /**
@@ -17,6 +19,7 @@ export const ANIMATION_STYLE_MAP = {
  */
 export const MOUNT_ANIMATION_FIGURE = {
   [ANIMATION_TYPE.FADE]: 1,
+  [ANIMATION_TYPE.SLIDE_UP]: 'translateY(0)',
 } as const;
 
 /**
@@ -25,4 +28,5 @@ export const MOUNT_ANIMATION_FIGURE = {
  */
 export const UNMOUNT_ANIMATION_FIGURE = {
   [ANIMATION_TYPE.FADE]: 0,
+  [ANIMATION_TYPE.SLIDE_UP]: 'translateY(100%)',
 } as const;
