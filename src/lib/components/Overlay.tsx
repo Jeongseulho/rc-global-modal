@@ -8,7 +8,7 @@ const Overlay = ({
   overlayStyle,
   overlayRef,
   onTransitionEnd,
-  animationTrigger,
+  animationStyle,
 }: OverlayProps) => {
   return (
     <div
@@ -21,8 +21,7 @@ const Overlay = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        transition: 'ease 500ms',
-        opacity: animationTrigger ? 1 : 0,
+        ...animationStyle,
         ...overlayStyle,
       })}
       className={overlayClassName}

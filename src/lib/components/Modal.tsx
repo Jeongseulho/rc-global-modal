@@ -7,6 +7,8 @@ import getModalRoot from '../utils/getModalRoot';
 import { useModal } from '../context/ModalContext';
 import { ModalProps } from '../types/ModalProps';
 import { useAnimation } from '../hooks/useAnimation';
+import { ANIMATION_TYPE } from '../constants/Animation';
+import getAnimationStyle from '../utils/getAnimationStyle';
 
 function Modal({
   children,
@@ -19,6 +21,8 @@ function Modal({
   closeOnEsc = true,
   modalContainerRef,
   overlayRef,
+  animationType = ANIMATION_TYPE.FADE,
+  animationDuration = 300,
 }: ModalProps) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
@@ -50,7 +54,11 @@ function Modal({
         overlayStyle={overlayStyle}
         overlayRef={overlayRef}
         onTransitionEnd={onTransitionEnd}
-        animationTrigger={animationTrigger}
+        animationStyle={getAnimationStyle(
+          animationType,
+          animationDuration,
+          animationTrigger,
+        )}
       >
         <ModalContainer
           modalContainerClassName={modalContainerClassName}

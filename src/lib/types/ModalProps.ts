@@ -1,7 +1,6 @@
 import { ModalId } from './ModalType';
-import { AnimationDuration } from './Animation';
-import { ANIMATION_TYPE } from './Animation';
 import { ObjValues } from './ObjValues';
+import { ANIMATION_TYPE } from '../constants/Animation';
 
 export interface OverlayProps {
   children: React.ReactNode;
@@ -12,7 +11,7 @@ export interface OverlayProps {
   overlayStyle?: React.CSSProperties;
   overlayRef?: React.RefObject<HTMLDivElement>;
   onTransitionEnd: () => void;
-  animationTrigger: boolean;
+  animationStyle?: React.CSSProperties;
 }
 
 export interface ModalContainerProps {
@@ -29,5 +28,5 @@ export interface ModalProps
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
   animationType: ObjValues<typeof ANIMATION_TYPE>;
-  animationDuration: AnimationDuration;
+  animationDuration: number;
 }
