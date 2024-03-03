@@ -4,9 +4,9 @@ import { OverlayProps } from '../types/ModalProps';
 const Overlay = ({
   children,
   onCloseModalClickOverlay,
-  overlayClassName,
-  overlayStyle,
-  overlayRef,
+  className,
+  style,
+  ref,
   onTransitionEnd,
   animationStyle,
 }: OverlayProps) => {
@@ -22,11 +22,11 @@ const Overlay = ({
         justifyContent: 'center',
         alignItems: 'center',
         ...animationStyle,
-        ...overlayStyle,
+        ...style,
       })}
-      className={overlayClassName}
+      className={className}
       onClick={onCloseModalClickOverlay}
-      ref={overlayRef}
+      ref={ref}
       onTransitionEnd={onTransitionEnd}
     >
       {children}

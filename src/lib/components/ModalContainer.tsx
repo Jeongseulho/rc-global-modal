@@ -3,9 +3,11 @@ import { ModalContainerProps } from '../types/ModalProps';
 
 const ModalContainer = ({
   children,
-  modalContainerClassName,
-  modalContainerStyle,
-  modalContainerRef,
+  className,
+  style,
+  ref,
+  onTransitionEnd,
+  animationStyle,
 }: ModalContainerProps) => {
   return (
     <div
@@ -13,10 +15,12 @@ const ModalContainer = ({
         backgroundColor: 'white',
         padding: '1rem',
         borderRadius: '0.5rem',
-        ...modalContainerStyle,
+        ...animationStyle,
+        ...style,
       })}
-      className={modalContainerClassName}
-      ref={modalContainerRef}
+      className={className}
+      ref={ref}
+      onTransitionEnd={onTransitionEnd}
     >
       {children}
     </div>

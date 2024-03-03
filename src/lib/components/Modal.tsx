@@ -14,14 +14,15 @@ function Modal({
   children,
   id,
   closeOnOverlayClick = true,
+  closeOnEsc = true,
   modalContainerClassName,
   overlayClassName,
   modalContainerStyle,
   overlayStyle,
-  closeOnEsc = true,
   modalContainerRef,
   overlayRef,
   animationType = ANIMATION_TYPE.FADE,
+  // TODO: 양의 정수 타입 만들기
   animationDuration = 300,
 }: ModalProps) {
   const { openModalId } = useContext(ModalStateContext);
@@ -50,20 +51,26 @@ function Modal({
         onCloseModalClickOverlay={
           closeOnOverlayClick ? onCloseModalClickOverlay : undefined
         }
-        overlayClassName={overlayClassName}
-        overlayStyle={overlayStyle}
-        overlayRef={overlayRef}
+        className={overlayClassName}
+        style={overlayStyle}
+        ref={overlayRef}
         onTransitionEnd={onTransitionEnd}
         animationStyle={getAnimationStyle(
-          animationType,
+          ANIMATION_TYPE.FADE,
           animationDuration,
           animationTrigger,
         )}
       >
         <ModalContainer
-          modalContainerClassName={modalContainerClassName}
-          modalContainerStyle={modalContainerStyle}
-          modalContainerRef={modalContainerRef}
+          className={modalContainerClassName}
+          style={modalContainerStyle}
+          ref={modalContainerRef}
+          onTransitionEnd={onTransitionEnd}
+          animationStyle={getAnimationStyle(
+            animationType,
+            animationDuration,
+            animationTrigger,
+          )}
         >
           {children}
         </ModalContainer>
