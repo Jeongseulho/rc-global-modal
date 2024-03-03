@@ -1,6 +1,5 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import { OverlayProps } from '../types/ModalProps';
-import { useLayoutEffect, useState } from 'react';
 
 const Overlay = ({
   children,
@@ -8,36 +7,9 @@ const Overlay = ({
   overlayClassName,
   overlayStyle,
   overlayRef,
+  onTransitionEnd,
+  animationTrigger,
 }: OverlayProps) => {
-  const [mounted, setMounted] = useState(false);
-
-  const fadeIn = keyframes`
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  `;
-
-  const fadeInAnimation = `${fadeIn} 0.3s`;
-
-  const fadeOut = keyframes`
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  `;
-
-  const fadeOutAnimation = `${fadeOut} 0.3s`;
-
-  useLayoutEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
-
   return (
     <div
       css={css({
@@ -49,12 +21,14 @@ const Overlay = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        animation: `${mounted ? fadeInAnimation : fadeOutAnimation}`,
+        transition: 'ease 500ms',
+        opacity: animationTrigger ? 1 : 0,
         ...overlayStyle,
       })}
       className={overlayClassName}
       onClick={onCloseModalClickOverlay}
       ref={overlayRef}
+      onTransitionEnd={onTransitionEnd}
     >
       {children}
     </div>

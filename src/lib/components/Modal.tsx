@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 import getModalRoot from '../utils/getModalRoot';
 import { useModal } from '../context/ModalContext';
 import { ModalProps } from '../types/ModalProps';
+import { useAnimation } from '../hooks/useAnimation';
 
 function Modal({
   children,
@@ -18,12 +19,13 @@ function Modal({
   closeOnEsc = true,
   modalContainerRef,
   overlayRef,
-}: // animationType = 'none',
-// animationDuration = 300,
-ModalProps) {
+}: ModalProps) {
   const { openModalId } = useContext(ModalStateContext);
   const modalRoot = getModalRoot();
   const { closeModal } = useModal();
+  const { shouldMount, animationTrigger, onTransitionEnd } = useAnimation(
+    id === openModalId,
+  );
 
   useEffect(() => {
     const closeOnEscHandler = (e: KeyboardEvent) => {
@@ -38,7 +40,7 @@ ModalProps) {
   };
 
   return (
-    openModalId === id &&
+    shouldMount &&
     createPortal(
       <Overlay
         onCloseModalClickOverlay={
@@ -47,6 +49,8 @@ ModalProps) {
         overlayClassName={overlayClassName}
         overlayStyle={overlayStyle}
         overlayRef={overlayRef}
+        onTransitionEnd={onTransitionEnd}
+        animationTrigger={animationTrigger}
       >
         <ModalContainer
           modalContainerClassName={modalContainerClassName}

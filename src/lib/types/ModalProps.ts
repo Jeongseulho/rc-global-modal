@@ -11,6 +11,8 @@ export interface OverlayProps {
   overlayClassName?: string;
   overlayStyle?: React.CSSProperties;
   overlayRef?: React.RefObject<HTMLDivElement>;
+  onTransitionEnd: () => void;
+  animationTrigger: boolean;
 }
 
 export interface ModalContainerProps {
