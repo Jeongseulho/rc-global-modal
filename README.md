@@ -35,6 +35,8 @@ npm i rc-global-modal
 | closeOnEsc | `boolean` | ❌ | `true` | close modal when esc key is pressed |
 | modalContainerRef | `React.RefObject` | ❌ |  | ref for modal container |
 | overlayRef | `React.RefObject` | ❌ |  | ref for overlay |
+| animationType | `'fade' \| 'slideUp' ` | ❌ | `fade` | animation type for modal |
+| animationDuration | `number` | ❌ | `300` | animation duration for modal |
 
 ## Usage
 

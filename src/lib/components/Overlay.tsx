@@ -4,9 +4,11 @@ import { OverlayProps } from '../types/ModalProps';
 const Overlay = ({
   children,
   onCloseModalClickOverlay,
-  overlayClassName,
-  overlayStyle,
-  overlayRef,
+  className,
+  style,
+  ref,
+  onTransitionEnd,
+  animationStyle,
 }: OverlayProps) => {
   return (
     <div
@@ -19,11 +21,13 @@ const Overlay = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        ...overlayStyle,
+        ...animationStyle,
+        ...style,
       })}
-      className={overlayClassName}
+      className={className}
       onClick={onCloseModalClickOverlay}
-      ref={overlayRef}
+      ref={ref}
+      onTransitionEnd={onTransitionEnd}
     >
       {children}
     </div>
