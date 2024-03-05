@@ -10,6 +10,7 @@ manage modal using global state in react project
 ## Table of Contents
 
 - [Installation](#installation)
+- [Features](#features)
 - [Props](#props)
 - [Usage](#usage)
 - [Examples](#examples)
@@ -20,6 +21,12 @@ manage modal using global state in react project
 ```
 npm i rc-global-modal
 ```
+
+## Features
+1. Open and close modal from anywhere in the app(inside `ModalProvider`)
+2. Custom CSS style for modal and overlay
+3. Ref for modal container and overlay
+4. Choose animation type and duration for modal
 
 ## Props
 
