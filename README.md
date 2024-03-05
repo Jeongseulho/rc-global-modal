@@ -23,6 +23,7 @@ npm i rc-global-modal
 ```
 
 ## Features
+
 1. Open and close modal from anywhere in the app(inside `ModalProvider`)
 2. Custom CSS style for modal and overlay
 3. Ref for modal container and overlay
