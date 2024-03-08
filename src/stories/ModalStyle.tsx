@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import Modal from '../lib/index';
 import { useModal } from '../lib/index';
+import { ModalProps } from '../lib/types/ModalProps';
 
-interface Props {
-  modalContainerStyle: React.CSSProperties;
-  overlayStyle: React.CSSProperties;
-}
+type Props = Pick<ModalProps, 'modalContainerStyle' | 'overlayStyle'>;
 
 export const ModalStyle = ({ modalContainerStyle, overlayStyle }: Props) => {
   const { openModal } = useModal();

@@ -22,7 +22,6 @@ function Modal({
   modalContainerRef,
   overlayRef,
   animationType = ANIMATION_TYPE.FADE,
-  // TODO: 양의 정수 타입 만들기
   animationDuration = 300,
 }: ModalProps) {
   const { openModalId } = useContext(ModalStateContext);
