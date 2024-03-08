@@ -6,7 +6,6 @@ import {
 } from './../constants/Animation';
 import { ObjValues } from '../types/ObjValues';
 
-// TODO: 반환 타입 좁히기
 const getAnimationStyle = (
   animationType: ObjValues<typeof ANIMATION_TYPE>,
   animationDuration: number,

@@ -30,6 +30,6 @@ export interface ModalProps {
   overlayStyle?: React.CSSProperties;
   modalContainerRef?: React.RefObject<HTMLDivElement>;
   overlayRef?: React.RefObject<HTMLDivElement>;
-  animationType: ObjValues<typeof ANIMATION_TYPE>;
-  animationDuration: number;
+  animationType?: ObjValues<typeof ANIMATION_TYPE>;
+  animationDuration?: number;
 }
