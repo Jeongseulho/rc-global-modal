@@ -8,30 +8,42 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check Out Code
         uses: actions/checkout@v4
-
-      - name: Commit Update Version
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          npm version patch
-
-      - name: Push Update Version
-        uses: ad-m/github-push-action@master
         with:
-          tags: true
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Commit Update Version
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # [skip ci]를 메시지에 포함하여 무한 루프 방지
+          # %s는 npm version이 생성하는 새 버전 번호(예: v0.1.25)로 치환됩니다.
+          npm version patch -m "chore: release %s [skip ci]"
+
+      - name: Push Update Version
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          tags: true
 
       - name: Npm Publish
         run: |
           npm ci
           npm run build
-      - uses: JS-DevTools/npm-publish@v3
+          
+      - name: JS-DevTools Publish
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
