@@ -147,7 +147,7 @@ describe('Modal Core Logic', () => {
           >
             Open Pop Modal
           </button>
-          <button onClick={() => modal.pop('pop-modal')}>Pop the Modal</button>
+          <button onClick={() => modal.pop()}>Pop the Modal</button>
         </div>
       );
     };
