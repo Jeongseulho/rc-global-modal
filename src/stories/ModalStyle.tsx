@@ -7,24 +7,32 @@ type Props = Pick<ModalOptions, 'modalContainerStyle' | 'overlayStyle'>;
 export const ModalStyle = ({ modalContainerStyle, overlayStyle }: Props) => {
   const modal = useModal();
 
-  useEffect(() => {
-    // Clear any existing modals to avoid stacking in Storybook
-    modal.clear();
-    
-    modal.push({
-      key: 'modal-id',
-      options: {
-        modalContainerStyle,
-        overlayStyle,
-      },
-      Component: () => (
-        <div>
-          <h1>Modal Content</h1>
-        </div>
-      ),
-      props: {}
-    });
-  }, [modal, modalContainerStyle, overlayStyle]);
+  const handleOpenModal = async () => {
+    try {
+      const result = await modal.push({
+        key: 'style-modal',
+        options: {
+          modalContainerStyle,
+          overlayStyle,
+        },
+        Component: ({ resolve, reject }) => (
+          <div>
+            <h1>Styled Modal Content</h1>
+            <button onClick={() => resolve('Resolved!')}>Resolve</button>
+            <button onClick={() => reject('Rejected!')}>Close Modal</button>
+          </div>
+        ),
+        props: {}
+      });
+      alert(`Modal result: ${result}`);
+    } catch (error) {
+      console.log('Modal closed:', error);
+    }
+  };
 
-  return <></>;
+  return (
+    <>
+      <button onClick={handleOpenModal}>Open Styled Modal</button>
+    </>
+  );
 };
