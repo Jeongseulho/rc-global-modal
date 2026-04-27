@@ -1,4 +1,3 @@
-import { ModalId } from './ModalType';
 import { ObjValues } from './ObjValues';
 import { ANIMATION_TYPE } from '../constants/Animation';
 import React from 'react';
