@@ -8,7 +8,8 @@ on:
 
 # List of jobs
 jobs:
-  test:
+  deploy:
+    name: 'Storybook Deploy'
     # Operating System
     runs-on: ubuntu-latest
     # Job steps
