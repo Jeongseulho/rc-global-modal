@@ -1,6 +1,6 @@
 # rc global modal
 
-manage modal using global state in react project  
+manage modal using global state and Promise in react project  
 [Try it out with Storybook](https://66193d56430d2f881d4689f4-hcwutpdigo.chromatic.com/?path=/story/modal-interaction--modal-interaction-example)
 
 [![npm version](https://img.shields.io/npm/v/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)  
@@ -12,7 +12,7 @@ manage modal using global state in react project
 
 - [Installation](#installation)
 - [Features](#features)
-- [Props](#props)
+- [Options](#options)
 - [Usage](#usage)
 - [Examples](#examples)
 - [License](#license)
@@ -25,17 +25,17 @@ npm i rc-global-modal
 
 ## Features
 
-1. Open and close modal from anywhere in the app(inside `ModalProvider`)
+1. Open and close modal from anywhere in the app(inside `ModalProvider`) using Promise API.
 2. Custom CSS style for modal and overlay
 3. Ref for modal container and overlay
 4. Choose animation type and duration for modal
 
-## Props
+## Options
+
+These options can be passed to the `options` property when pushing a new modal.
 
 | Props | Types | Required | Default | Description |
 | :-: | :-: | :-: | :-: | :-: |
-| children | `React.FC` | ✅ |  | component that will be displayed inside modal |
-| id | `string \| number` | ✅ |  | unique id for modal |
 | closeOnOverlayClick | `boolean` | ❌ | `true` | close modal when overlay is clicked |
 | modalContainerClassName | `string` | ❌ |  | class name for modal container |
 | overlayClassName | `string` | ❌ |  | class name for overlay |
@@ -63,35 +63,43 @@ function App() {
 }
 ```
 
-2. Use `Modal` component to display modal(must be inside `ModalProvider`)
+2. Use `useModal` hook and `.push` method to display modal. The pushed modal acts as a Promise.
 
 ```tsx
-import { Modal } from 'rc-global-modal';
+import { useModal } from 'rc-global-modal';
 
-const Home = () => {
-  return (
-      <Modal id={1}>
-        <h1>IdOneModal</h1>
-      </Modal>
-  );
-};
-```
-
-3. Use `openModal` and `closeModal` function to open and close modal(must be inside `ModalProvider`)
-
-```tsx
-import { Modal, useModal } from 'rc-global-modal';
-
-const Home = () => {
-  const { openModal, closeModal } = useModal();
+const TestModal = ({ resolve, reject }) => {
   return (
     <div>
-      <button onClick={() => openModal(1)}>open Id One modal</button>
-      <Modal id={1}>
-        <h1>IdOneModal</h1>
-        <button onClick={closeModal}>close modal</button>
-      </Modal>
+      <h1>My Modal</h1>
+      <button onClick={() => resolve('Confirm!')}>Confirm</button>
+      <button onClick={() => reject('Cancel!')}>Cancel</button>
     </div>
+  );
+};
+
+const Home = () => {
+  const modal = useModal();
+
+  const handleOpen = async () => {
+    try {
+      const result = await modal.push({
+        key: 'test',
+        Component: TestModal,
+        props: {}, // Props for TestModal
+        options: {
+          animationType: 'slideUp',
+          closeOnOverlayClick: true,
+        }
+      });
+      console.log('Result:', result);
+    } catch (e) {
+      console.log('Rejected/Closed:', e);
+    }
+  };
+
+  return (
+    <button onClick={handleOpen}>Open Modal</button>
   );
 };
 ```
@@ -99,25 +107,41 @@ const Home = () => {
 ## Examples
 
 ```tsx
-import { Modal, useModal } from 'rc-global-modal';
+import { useModal } from 'rc-global-modal';
+
+const ConfirmModal = ({ resolve, reject, message }) => {
+  return (
+    <div style={{ background: 'white', padding: 20 }}>
+      <p>{message}</p>
+      <button onClick={() => resolve(true)}>Yes</button>
+      <button onClick={() => reject(new Error('User cancelled'))}>No</button>
+    </div>
+  );
+};
 
 const Home = () => {
-  const { openModal, closeModal } = useModal();
+  const modal = useModal();
+
+  const onDelete = async () => {
+    try {
+      const isConfirmed = await modal.push({
+        key: 'confirm-delete',
+        Component: ConfirmModal,
+        props: { message: 'Are you sure you want to delete this item?' },
+      });
+      
+      if (isConfirmed) {
+        // Delete logic here
+        console.log('Item deleted');
+      }
+    } catch (error) {
+      console.log('Deletion cancelled');
+    }
+  };
+
   return (
     <div>
-      <button onClick={() => openModal(1)}>open Id One modal</button>
-
-      <button onClick={() => openModal(2)}>open Id Two modal</button>
-
-      <Modal id={1}>
-        <h1>IdOneModal</h1>
-        <button onClick={closeModal}>close modal</button>
-      </Modal>
-
-      <Modal id={2}>
-        <h1>IdTwoModal</h1>
-        <button onClick={closeModal}>close modal</button>
-      </Modal>
+      <button onClick={onDelete}>Delete Item</button>
     </div>
   );
 };

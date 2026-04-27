@@ -1,10 +1,9 @@
 import React from 'react';
-import Modal from '../lib/index';
 import { useModal } from '../lib/index';
-import { ModalProps } from '../lib/types/ModalProps';
+import { ModalOptions } from '../lib/types/ModalProps';
 
 type Props = Pick<
-  ModalProps,
+  ModalOptions,
   'closeOnOverlayClick' | 'closeOnEsc' | 'animationType'
 >;
 
@@ -13,20 +12,35 @@ export const ModalInteraction = ({
   closeOnEsc,
   animationType,
 }: Props) => {
-  const { openModal, closeModal } = useModal();
+  const modal = useModal();
+
+  const handleOpenModal = async () => {
+    try {
+      const result = await modal.push({
+        key: 'interaction-modal',
+        options: {
+          closeOnOverlayClick,
+          closeOnEsc,
+          animationType,
+        },
+        Component: ({ resolve, reject }) => (
+          <div>
+            <h1>Modal Content</h1>
+            <button onClick={() => resolve('Resolved!')}>Resolve</button>
+            <button onClick={() => reject('Rejected!')}>Close Modal</button>
+          </div>
+        ),
+        props: {}
+      });
+      alert(`Modal result: ${result}`);
+    } catch (error) {
+      console.log('Modal closed:', error);
+    }
+  };
 
   return (
     <>
-      <button onClick={() => openModal('modal-id')}>Open Modal</button>
-      <Modal
-        id="modal-id"
-        closeOnOverlayClick={closeOnOverlayClick}
-        closeOnEsc={closeOnEsc}
-        animationType={animationType}
-      >
-        <h1>Modal Content</h1>
-        <button onClick={closeModal}>Close Modal</button>
-      </Modal>
+      <button onClick={handleOpenModal}>Open Modal</button>
     </>
   );
 };
