@@ -1,7 +1,7 @@
 # rc global modal
 
 manage modal using global state and Promise in react project  
-[Try it out with Storybook](https://66193d56430d2f881d4689f4-hcwutpdigo.chromatic.com/?path=/story/modal-interaction--modal-interaction-example)
+[Try it out with Storybook](https://main--66193d56430d2f881d4689f4.chromatic.com/)
 
 [![npm version](https://img.shields.io/npm/v/rc-global-modal.svg?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)  
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/rc-global-modal?style=flat-square)](https://www.npmjs.com/package/rc-global-modal)  
