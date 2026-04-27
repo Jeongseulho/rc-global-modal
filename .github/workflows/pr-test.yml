@@ -21,6 +21,9 @@ jobs:
           npm ci
           npm run build
 
+      - name: Test
+        run: npm run test:ci
+
       - name: Check Size
         run: |
           if ! npx size-limit; then

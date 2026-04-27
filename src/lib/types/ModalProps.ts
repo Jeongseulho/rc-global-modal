@@ -1,6 +1,6 @@
-import { ModalId } from './ModalType';
 import { ObjValues } from './ObjValues';
 import { ANIMATION_TYPE } from '../constants/Animation';
+import React from 'react';
 
 interface CommonProps {
   children: React.ReactNode;
@@ -19,9 +19,8 @@ export interface OverlayProps extends CommonProps {
 
 export interface ModalContainerProps extends CommonProps {}
 
-export interface ModalProps {
-  children: React.ReactNode;
-  id: Exclude<ModalId, null>;
+// Props specific to modal behavior and styling
+export interface ModalOptions {
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
   modalContainerClassName?: string;

@@ -1,24 +1,30 @@
 import React, { useEffect } from 'react';
-import Modal from '../lib/index';
 import { useModal } from '../lib/index';
-import { ModalProps } from '../lib/types/ModalProps';
+import { ModalOptions } from '../lib/types/ModalProps';
 
-type Props = Pick<ModalProps, 'modalContainerStyle' | 'overlayStyle'>;
+type Props = Pick<ModalOptions, 'modalContainerStyle' | 'overlayStyle'>;
 
 export const ModalStyle = ({ modalContainerStyle, overlayStyle }: Props) => {
-  const { openModal } = useModal();
+  const modal = useModal();
 
   useEffect(() => {
-    openModal('modal-id');
-  }, [openModal]);
+    // Clear any existing modals to avoid stacking in Storybook
+    modal.clear();
+    
+    modal.push({
+      key: 'modal-id',
+      options: {
+        modalContainerStyle,
+        overlayStyle,
+      },
+      Component: () => (
+        <div>
+          <h1>Modal Content</h1>
+        </div>
+      ),
+      props: {}
+    });
+  }, [modal, modalContainerStyle, overlayStyle]);
 
-  return (
-    <Modal
-      id="modal-id"
-      modalContainerStyle={modalContainerStyle}
-      overlayStyle={overlayStyle}
-    >
-      <h1>Modal Content</h1>
-    </Modal>
-  );
+  return <></>;
 };
